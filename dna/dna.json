@@ -1,0 +1,146 @@
+{
+    "Version": 1,
+    "UUID": "00000000-0000-0000-0000-000000000000",
+    "Name": "Magoo",
+    "Properties": {
+        "description": "Decentralized SCRUM",
+        "language": "en"
+    },
+    "PropertiesSchemaFile": "properties_schema.json",
+    "BasedOn": "",
+    "RequiresVersion": 26,
+    "DHTConfig": {
+        "HashType": "sha2-256",
+        "RedundancyFactor": 0
+    },
+    "Progenitor": {
+        "Identity": "",
+        "PubKey": null
+    },
+    "Zomes": [
+        {
+            "Name": "codeLibrary",
+            "Description": "Helper functions used by other zomes",
+            "CodeFile": "lib.js",
+            "RibosomeType": "js",
+            "BridgeFuncs": null,
+            "Config": null,
+            "Functions": [
+                {
+                    "Name": "guid",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "is_dict",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "update_object",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getAllEntries",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                }
+            ]
+        },
+        {
+            "Name": "stories",
+            "Description": "Manages SCRUM stories",
+            "CodeFile": "zome.js",
+            "RibosomeType": "js",
+            "BridgeFuncs": null,
+            "Config": null,
+            "Entries": [
+                {
+                    "Name": "stories",
+                    "DataFormat": "json",
+                    "Sharing": "public"
+                }
+            ],
+            "Functions": [
+                {
+                    "Name": "write",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getAll",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getSingle",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "updateItem",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "archive",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                }
+            ]
+        },
+        {
+            "Name": "tasks",
+            "Description": "Manages SCRUM tasks",
+            "CodeFile": "zome.js",
+            "RibosomeType": "js",
+            "BridgeFuncs": null,
+            "Config": null,
+            "Entries": [
+                {
+                    "Name": "tasks",
+                    "DataFormat": "json",
+                    "Sharing": "public"
+                },
+                {
+                    "Name": "task_links",
+                    "DataFormat": "links",
+                    "Sharing": "public"
+                }
+            ],
+            "Functions": [
+                {
+                    "Name": "write",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getAll",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getAllForStory",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "getSingle",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "updateItem",
+                    "CallingType": "json",
+		    "Exposure": "public"
+                },
+                {
+                    "Name": "archive",
+                    "CallingType": "string",
+		    "Exposure": "public"
+                }
+            ]
+        }
+    ]
+}

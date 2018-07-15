@@ -1,0 +1,125 @@
+<html>
+    <head>
+	<title>Magoo</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    </head>
+    <body>
+
+	<!-- As a heading -->
+	<nav class="navbar navbar-light bg-light">
+	    <span class="navbar-brand mb-0 h1">Magoo</span>
+	</nav>
+
+	<div class="container">
+	    <br>
+	    <div class="row">
+		<div class="col-6">
+		    <div id="listStories">
+			<h3>Stories
+			    <button class="btn btn-light btn-sm"
+				    v-on:click="refresh">Refresh</button>
+			</h3>
+			<span>
+			    Sum totals
+			    <span class="badge badge-success badge-pill">{{ total('value') }}</span>
+			    <span class="badge badge-danger badge-pill">{{ total('effort') }}</span>
+			    <span class="badge badge-primary badge-pill">{{ (total('value') / total('effort')).toFixed(2) }}</span>
+			</span>
+			<br><br>
+			
+			<ul class="list-group">
+			    <li v-for="story in stories"
+				v-on:click="getTasks( story.Hash, story.Entry )"
+				class="list-group-item d-flex justify-content-between align-items-center">
+				<span>
+				    <strong>{{ story.Entry.title }}</strong><br>
+				    As a {{ story.Entry.as }},
+				    <br> &mdash; I {{ story.Entry.feature }},
+				    <br> &mdash; so that {{ story.Entry.reason }}
+				    <br>
+				    <span class="badge badge-success badge-pill">{{ story.Entry.value }}</span>
+				    <span class="badge badge-danger badge-pill">{{ story.Entry.effort }}</span>
+				</span>
+
+				<span class="badge badge-primary badge-pill">{{ calculateROI( story.Entry ) }}</span>
+			    </li>
+			</ul>
+		    </div>
+		    <br>
+		    
+		    <div class="row">
+			<div class="col text-left">
+			    <button id="createStoryModal"
+				    class="btn btn-primary"
+				    v-on:click="createStoryModal">Create Story</button>
+			</div>
+		    </div>
+
+		</div>
+		<div class="col-6">
+		    <div id="listTasks">
+			<h3>Tasks</h3>
+			<div v-if="activeStoryHash">
+			    <h3><small>for {{ activeStory.title }}
+				    <button class="btn btn-light btn-sm"
+					    v-on:click="refresh">Refresh</button>
+			    </small></h3>
+
+			    <span>
+				Sum totals
+				<span class="badge badge-secondary badge-pill">{{ total('hours') }}</span>
+			    </span>
+			    <br><br>
+			    
+			    <form v-on:submit.prevent="createTask">
+				<div class="form-row align-items-center">
+				    <div class="col-8">
+					<input v-model="summary" id="createTaskStart" class="form-control">
+					<small class="form-text text-muted">Create a quick task</small>
+				    </div>
+				    <div class="col-2">
+					<input v-model="hours" type="number" class="form-control">
+					<small class="form-text text-muted">Est. hours</small>
+				    </div>
+				    <div class="col-auto my-1">
+					<button type="submit" class="btn btn-primary">
+					    Create
+					</button><br>
+					<small class="form-text text-muted">&nbsp;</small>
+				    </div>
+				</div>
+			    </form>
+
+			    <ul class="list-group">
+				<li v-for="task in tasks"
+				    class="list-group-item d-flex justify-content-between align-items-center">
+				    <span>
+					{{ task.Entry.summary }}
+				    </span>
+
+				    <span class="badge badge-primary badge-pill">{{ task.Entry.hours }}</span>
+				</li>
+			    </ul>
+
+			</div>
+
+			<div v-else
+			     class="alert alert-primary" role="alert">
+			    Select a story to see tasks
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue-router"></script> -->
+
+	<script type="text/javascript" src="app.js" ></script>
+    </body>
+</html>

@@ -1,0 +1,106 @@
+{
+    "Tests": [
+        {
+            "Convey": "Write a new story",
+            "Zome": "stories",
+            "FnName": "write",
+            "Input": {
+                "title": "Get a baby",
+                "as": "Parent",
+		"feature": "want a baby",
+		"reason": "so that I can get puked on all the time"
+            },
+            "Output": "%h%",
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Get last story",
+            "Zome": "stories",
+            "FnName": "getSingle",
+            "Input": "%h%",
+            "Output": {
+                "title": "Get a baby",
+                "as": "Parent",
+		"feature": "want a baby",
+		"reason": "so that I can get puked on all the time"
+            },
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Update last story",
+            "Zome": "stories",
+            "FnName": "updateItem",
+            "Input": {
+		"hash": "%h%",
+		"data": {
+                    "title": "Get 2 babies",
+                    "as": "Parent",
+		    "feature": "want 2 babies",
+		    "reason": "so that I can get puked on all the time twice"
+		}
+	    },
+            "Output": "%h%",
+            "Exposure": "public"
+        },
+
+
+	
+        {
+            "Convey": "Write a new task",
+            "Zome": "tasks",
+            "FnName": "write",
+            "Input": {
+                "summary": "Find a woman or adobption agency",
+		"storyHash": "%h%"
+            },
+            "Output": true,
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Get last task",
+            "Zome": "tasks",
+            "FnName": "getSingle",
+            "Input": "%h1%",
+            "Regexp": "{.*}",
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Update last task",
+            "Zome": "tasks",
+            "FnName": "updateItem",
+            "Input": {
+		"hash": "%h1%",
+		"data": {
+                    "summary": "Find a woman or adobption agency or a lost child"
+		}
+	    },
+            "Output": "%h%",
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Get all tasks for story",
+            "Zome": "tasks",
+            "FnName": "getAllForStory",
+            "Input": "Qmery9CSByDkX3QPNQ4U6uskCqgypzpt3SUyZSepTKbk7J",
+            "Regexp": "\\[.*\\]",
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Remove last task",
+            "Zome": "tasks",
+            "FnName": "archive",
+            "Input": "%h%",
+            "Output": "%h%",
+            "Exposure": "public"
+        },
+        {
+            "Convey": "Remove last story",
+            "Zome": "tasks",
+            "FnName": "archive",
+            "Input": "Qmery9CSByDkX3QPNQ4U6uskCqgypzpt3SUyZSepTKbk7J",
+            "Output": "%h%",
+            "Exposure": "public"
+        }
+
+    ]
+}
